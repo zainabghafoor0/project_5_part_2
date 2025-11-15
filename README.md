@@ -1,4 +1,8 @@
-# 📦 Batch-then-Drain Priority Queue Profile  
+# 📦 Batch-then-Drain Priority Queue Profile
+**Name:** Zainab Ghafoor  
+**ID:** 008259427  
+**GitHub repository link:** [[https://github.com/zainabghafoor0/project3_p2.git]((https://github.com/zainabghafoor0/project3_p2.git))]
+
 ### *Empirical Analysis Project — Priority Queue Study*
 
 This project extends the existing Huffman profile analysis by adding a new workload called **Batch-then-Drain**. The goal is to:
