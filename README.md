@@ -1,7 +1,7 @@
 # 📦 Project 5 (Part 2) – Open-Addressed Hash Tables with LRU Workload
 **Name:** Zainab Ghafoor  
 **ID:** 008259427  
-**GitHub repository:** https://github.com/zainabghafoor0/project_5_p2
+**GitHub repository:** https://github.com/zainabghafoor0/project_5_part_2.git
 
 This project analyzes the behavior of an **open-addressed hash table** under a **delete-heavy Least-Recently Used (LRU)** workload. The focus is on:
 
