@@ -1,169 +1,84 @@
-# 📦 Batch-then-Drain Priority Queue Profile
+# 📦 Project 5 (Part 2) – Open-Addressed Hash Tables with LRU Workload
 **Name:** Zainab Ghafoor  
 **ID:** 008259427  
-**GitHub repository link:** [[https://github.com/zainabghafoor0/project3_p2.git]((https://github.com/zainabghafoor0/project3_p2.git))]
+**GitHub repository link:** [[https://github.com/zainabghafoor0/project3_p2.git]((https://github.com/zainabghafoor0/project_5_p2.git))]
 
-### *Empirical Analysis Project — Priority Queue Study*
 
-This project extends the existing Huffman profile analysis by adding a new workload called **Batch-then-Drain**. The goal is to:
+This project studies how open-addressed hash tables behave under a **delete-heavy LRU (Least-Recently Used)** workload.
 
-- Generate traces for a new profile  
-- Replay them using the existing harness  
-- Time four different priority queue implementations  
-- Produce CSV results  
-- Visualize performance using the provided HTML tool  
-- Write a short analytical report  
+You:
 
-This README guides you through **every step** required to reproduce the full pipeline.
-
----
-
-# 🏗 0. Directory Setup (Required by Assignment)
-
-A **new directory** was created for this profile:
-
-```
-src/trace-generators/batch_then_drain/
-```
-
-A new generator file was added:
-
-```
-src/trace-generators/batch_then_drain/main.cpp
-```
-
-The generator creates:
-
-- **N insert operations**, followed by  
-- **N extract operations**  
-
-Keys are sampled from a large uniform range.  
-Generated traces appear under:
-
-```
-traces/batch_then_drain/
-```
+- Reuse a provided `HashTableDictionary` implementation (open addressing with single and double probing).
+- Replay LRU profile trace files (`lru_profile_N_..._S_23.trace`) against the table.
+- Use a **timing harness** to compare:
+  - **Single (linear) probing** vs **double hashing**
+  - With compaction turned on
+- Export CSV metrics for plotting and analysis (D3 apps).
 
 ---
 
-# ⚙️ 1. Building the Project
+## Directory Layout
 
-## 1.1 Build the Batch-then-Drain Trace Generator
+Key files in this repo:
 
-```bash
-g++ -std=c++20     src/trace-generators/batch_then_drain/main.cpp     utils/TraceConfig.cpp     -o batch_then_drain_trace
-```
+- **Core hash table & helpers (given):**
+  - `HashTableDictionary.hpp`
+  - `HashTableDictionary.cpp`
+  - `InvertedListDictionary.hpp`
+  - `InvertedListDictionary.cpp`
+  - `SmallIntMixedOperations.hpp`
+  - `SmallIntMixedOperations.cpp`
+  - `Operations.hpp`
 
----
+- **Standalone driver (given):**
+  - `main.cpp`  
+    Standalone program that:
+    - takes a single LRU trace file,
+    - constructs a `HashTableDictionary`,
+    - replays the trace once,
+    - prints statistics and masks (ACTIVE / DELETED / AVAILABLE, before/after compaction).
 
-## 1.2 Build the Harness
+- **LRU trace files (given):**
+  - `lru_profile_trace_files/`
+    - `lru_profile_N_1024_S_23.trace`
+    - `lru_profile_N_2048_S_23.trace`
+    - `...` (additional N values as provided)
 
-```bash
-g++ -std=c++20     src/harness/main.cpp     utils/TraceConfig.cpp     utils/comparator.cpp     src/implementations/LinearBaseLine/LinearBaseLine.cpp     src/implementations/BinaryHeapInVector/BinaryHeapInVector.cpp     src/implementations/BinomialQueues/BinomialQueue.cpp     src/implementations/BinomialQueues/BQnode.cpp     src/implementations/BinomialQueues/SmallIntMixedOperations.cpp     src/implementations/BinomialQueues/InvertedListDictionary.cpp     src/implementations/Oracle/QuadraticOracle.cpp     -o harness
-```
-
----
-
-# 📜 2. Generate Batch-then-Drain Traces
-
-```bash
-./batch_then_drain_trace
-```
-
-Outputs traces such as:
-
-```
-traces/batch_then_drain/batch_then_drain_N_1024_S_23.trace
-```
-
----
-
-# 🧪 3. Run the Harness (Replay + Timing)
-
-```bash
-./harness batch_then_drain > csvs/batch_then_drain_results.csv
-```
-
-Preview:
-
-```bash
-head csvs/batch_then_drain_results.csv
-```
+- **Word corpora (for building your own traces later):**
+  - `20980712_uniq_words.txt`
+  - `50000_words_6770_uniq.txt`
+  - `6770_uniq_words.txt`
+  - `all_uniq_tokens_imdb_and_newsgroups.txt`
 
 ---
 
-# 📊 4. Plot Performance
+## New File Added in This Part
 
-Open:
+### `LRUHarness.cpp`  ✅ (new)
 
-```
-charts/pq_multi_impl_anchor_heap_tooltips.html
-```
+This is the **timing harness** you added for the LRU profile experiments.
 
-Load:
+Responsibilities:
 
-```
-csvs/batch_then_drain_results.csv
-```
+- Takes a **trace directory** as a command-line argument (e.g. `lru_profile_trace_files`).
+- For each `N` in a predefined list (e.g., 1024, 2048, 4096, …):
+  - Constructs the trace path:  
+    `lru_profile_N_<N>_S_23.trace`
+  - Uses `load_trace_strict_header` to read:
+    - `N` and `seed` from the header line
+    - operations (`I` / `E`) into a `std::vector<Operation>`
+  - Uses `tableSizeForN(N)` to map logical capacity `N` to prime table size `M`.
+- For each trace and each probe type:
+  - Runs **SINGLE** probing (linear) with compaction enabled.
+  - Runs **DOUBLE** probing with compaction enabled.
+  - For each configuration:
+    - Executes **1 warm-up run** (untimed).
+    - Executes **7 timed runs**, measuring elapsed time in milliseconds.
+    - Computes the **median elapsed_ms**.
+  - Calls `HashTableDictionary::csvStats()` at the end of the last run.
+- Writes a **single CSV line per configuration**, with columns:
 
-Save plot as:
+  ```text
+  impl,profile,trace_path,N,seed,elapsed_ms,ops_total,
+  <fields from HashTableDictionary::csvStatsHeader()>
 
-```
-charts/batch_then_drain_plot.png
-```
-
----
-
-# 📝 5. Write Report
-
-Include:
-
-- Question & Hypothesis  
-- Method  
-- Plot  
-- Interpretation  
-
-Files:
-
-- `report_batch_then_drain.md`
-- `report_batch_then_drain.pdf`
-
----
-
-# 📁 6. Final Submission Checklist
-
-### Code
-- `src/trace-generators/batch_then_drain/`
-- All PQ implementations  
-- Updated harness  
-
-### Data
-- `traces/batch_then_drain/`  
-- `csvs/batch_then_drain_results.csv`
-
-### Plot  
-- `batch_then_drain_plot.png`
-
-### Reports  
-- `report_batch_then_drain.md`  
-- `report_batch_then_drain.pdf`
-
-### Documentation  
-- `README.md`
-
----
-
-# 🔄 7. Re-run Entire Pipeline
-
-```bash
-rm -rf traces/batch_then_drain/*
-rm -f csvs/batch_then_drain_results.csv
-
-./batch_then_drain_trace
-./harness batch_then_drain > csvs/batch_then_drain_results.csv
-```
-
----
-
-# ✔️ Completed
-This README provides a full end-to-end workflow for reproducing the Batch-then-Drain empirical analysis.
