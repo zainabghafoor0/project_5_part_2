@@ -4,7 +4,7 @@
 
 ---
 
-# **5.1 Performance Analysis — Expectations vs Observations**
+# **Performance Analysis — Expectations vs Observations**
 
 This section evaluates timing, probe counts, and structural behavior of single (linear) probing vs. double hashing under an LRU workload using the provided trace files and harness results.
 
