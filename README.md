@@ -223,3 +223,9 @@ Use this `lru_results.csv` with the provided D3 timing visualization app to crea
    - Load `lru_results.csv` into the D3 timing app  
    - Use 0/1 maps from `HashTablesOpenAddressing` output in the D3 histogram app  
    - Answer all analysis questions in your report based on these plots and tables.
+   - 
+
+
+  ## Plot
+  ![Elapsed Time Curve](images/d3_plotting.png)
+
