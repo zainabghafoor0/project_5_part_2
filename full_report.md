@@ -1,6 +1,5 @@
 # Full LRU Workload Analysis Report  
 ### Hash Tables with Open Addressing — Single vs Double Probing  
-### Combined Sections 5.1 and 5.2 (Complete Report)
 
 ---
 
