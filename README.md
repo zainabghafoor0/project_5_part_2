@@ -226,6 +226,10 @@ Use this `lru_results.csv` with the provided D3 timing visualization app to crea
    - 
 
 
-  ## Plot
+  ## Plots
   ![Elapsed Time Curve](images/d3_plotting.png)
+  ![Elapsed Time Curve](images/d3_plotting.png)
+  ![Elapsed Time Curve](images/d3_plotting.png)
+
+  
 
