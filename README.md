@@ -151,7 +151,7 @@ This will compile both executables:
 
 ---
 
-## ▶️ Run Instructions (Linux)
+## ▶️ Run Instructions
 
 ### 1. Run the standalone visualizer on a single trace
 
