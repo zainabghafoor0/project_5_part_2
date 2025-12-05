@@ -33,7 +33,7 @@ This section evaluates timing, probe counts, and structural behavior of single (
 - After N ≥ 2¹⁶, double hashing becomes consistently faster.
 - At N = 2²⁰, double probing is ~25% faster.
 
-➡  runtime plot matches the theoretical expectation.
+ runtime plot matches the theoretical expectation.
 
 ---
 
@@ -180,7 +180,7 @@ At this particular N:
 - Both probing strategies show similarly minimal clustering  
 - Differences appear only at large N (from runtime plot)
 
-➡ Single probing will form longer clusters as N grows.
+ Single probing will form longer clusters as N grows.
 
 ---
 
