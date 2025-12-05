@@ -13,7 +13,7 @@ This section evaluates timing, probe counts, and structural behavior of single (
 
 ---
 
-## **5.1.1 Expected Behavior vs Actual Observations**
+## ** Expected Behavior vs Actual Observations**
 
 ### **Expected:**
 - **Small N:**  
@@ -37,7 +37,7 @@ This section evaluates timing, probe counts, and structural behavior of single (
 
 ---
 
-## **5.1.2 Work per Operation: Average Probes vs Elapsed Time**
+## ** Work per Operation: Average Probes vs Elapsed Time**
 
 At smaller N:
 - avg_probes is low for both methods  
@@ -55,7 +55,7 @@ In several Ns (midrange), avg_probes may appear similar while double hashing is 
 
 ---
 
-## **5.1.3 Hashing Cost and Memory Locality**
+## ** Hashing Cost and Memory Locality**
 
 ### Single probing:
 - Best locality: sequential access → cache-friendly
@@ -73,7 +73,7 @@ In several Ns (midrange), avg_probes may appear similar while double hashing is 
 
 ---
 
-## **5.1.4 Compaction Effects**
+## ** Compaction Effects**
 
 Compaction:
 - eliminates tombstones  
@@ -90,7 +90,7 @@ Double probing triggers fewer compactions because it diffuses tombstones across 
 
 ---
 
-## **5.1.5 Throughput and Latency Cross-Check**
+## ** Throughput and Latency Cross-Check**
 
 Throughput \(ops/ms\) mirrors elapsed time:
 
@@ -102,7 +102,7 @@ Throughput \(ops/ms\) mirrors elapsed time:
 
 ---
 
-## **5.1.6 Occupancy Metrics Sanity Check**
+## ** Occupancy Metrics Sanity Check**
 
 Metrics:
 - **load_factor_pct** (ACTIVE/M)
@@ -124,7 +124,7 @@ At large N, single probing consistently shows:
 
 ---
 
-## **5.1.7 Snapshot Before/After Compaction (Structural Interpretation)**
+## ** Snapshot Before/After Compaction (Structural Interpretation)**
 
 Compaction dramatically reshapes the table:
 
@@ -142,7 +142,7 @@ After compaction:
 
 ---
 
-# **5.2 Structural Analysis Using Histograms (ACTIVE + DELETED Maps)**
+# ** Structural Analysis Using Histograms (ACTIVE + DELETED Maps)**
 
 This section uses your histogram data to relate cluster shapes to probe and timing performance.
 
@@ -158,7 +158,7 @@ This section uses your histogram data to relate cluster shapes to probe and timi
 
 ---
 
-## **5.2.1 Longest 1-Runs in ACTIVE+DELETED**
+## ** Longest 1-Runs in ACTIVE+DELETED**
 
 Before compaction:
 - Runs counted: **3**
@@ -174,7 +174,7 @@ Interpretation:
 
 ---
 
-## **5.2.2 Single vs Double Probing: Visible Differences**
+## ** Single vs Double Probing: Visible Differences**
 
 At this particular N:
 - Both probing strategies show similarly minimal clustering  
@@ -184,7 +184,7 @@ At this particular N:
 
 ---
 
-## **5.2.3 Compaction Impact on 1-Runs**
+## ** Compaction Impact on 1-Runs**
 
 Before:
 - Medium cluster (length 3)
@@ -198,7 +198,7 @@ After:
 
 ---
 
-## **5.2.4 Histogram Overlay — Before vs After**
+## ** Histogram Overlay — Before vs After**
 
 ACTIVE runs:
 - Max run length 3 → 1  
@@ -213,7 +213,7 @@ INACTIVE runs:
 
 ---
 
-## **5.2.5 Longer Runs vs Probe Cost**
+## ** Longer Runs vs Probe Cost**
 
 When run lengths increase:
 - avg_probes increases  
@@ -224,7 +224,7 @@ single probing grows significantly slower than double hashing at high N.
 
 ---
 
-## **5.2.6 Compaction Improves Probes and Runtime**
+## ** Compaction Improves Probes and Runtime**
 
 After compaction:
 - probe paths are shorter  
@@ -236,7 +236,7 @@ This accounts for the smoother runtime curve segments.
 
 ---
 
-## **5.2.7 Load Factor Metrics vs Histogram**
+## ** Load Factor Metrics vs Histogram**
 
 Before compaction:
 - eff_load ≈ 95%  
@@ -277,7 +277,3 @@ Your results — runtime, probe counts, and histograms — reveal a coherent pat
 - Creates natural tombstone buildup  
 - Stress-tests probe strategies  
 - Rewards strategies that avoid clustering (double hashing)
-
----
-
-# **End of Combined Section 5.1 + 5.2 Report**
