@@ -21,7 +21,7 @@ Interpretation:
 ---
 
 ## 2. Single vs. Double Probing Clustering
-At this N-size, your histogram shows:
+At this N-size, histogram shows:
 - Very small run lengths (1–3)
 - Minimal clustering overall
 
@@ -63,7 +63,7 @@ When ACTIVE+DELETED runs grow longer:
 - average_probes increases  
 - elapsed_ms increases  
 
-Your runtime graph reflects this:
+ runtime graph reflects this:
 - Small N (short runs): lowest elapsed time  
 - Large N (longer probe chains): rapid time growth  
 
@@ -78,7 +78,7 @@ Compaction:
 - Reduces effective load factor  
 - Improves average_probes and elapsed_ms  
 
-Your histogram verifies this via the collapse of runs to length 1.
+ histogram verifies this via the collapse of runs to length 1.
 
 ---
 
@@ -98,7 +98,7 @@ This directly matches the structure seen in the histograms.
 ---
 
 ## Final Summary
-- Your table experiences minimal clustering at small N; compaction makes it nearly ideal.
+- table experiences minimal clustering at small N; compaction makes it nearly ideal.
 - Single and double probing behave similarly at this N, but diverge at larger N (as seen in the runtime plot).
 - Histograms clearly show compaction’s effectiveness in reducing clustering.
 - Structural behavior in the maps explains the measured performance patterns.
