@@ -228,8 +228,8 @@ Use this `lru_results.csv` with the provided D3 timing visualization app to crea
 
   ## Plots
   ![Elapsed Time Curve](images/d3_plotting.png)
-  ![Elapsed Time Curve](images/d3_plotting.png)
-  ![Elapsed Time Curve](images/d3_plotting.png)
+  ![Elapsed Time Curve](images/histogram_active.png)
+  ![Elapsed Time Curve](images/histogram_inactive.png)
 
   
 
