@@ -1,9 +1,9 @@
 # Full LRU Workload Analysis Report  
-### Hash Tables with Open Addressing- Single vs Double Probing  
+### Hash Tables with Open Addressing: Single vs Double Probing  
 
 ---
 
-# Performance Analysis- Expectations vs Observations
+# Performance Analysis: Expectations vs Observations
 
 This section evaluates timing, probe counts, and structural behavior of single (linear) probing vs. double hashing under an LRU workload using the provided trace files and harness results.
 
