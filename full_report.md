@@ -51,7 +51,7 @@ In several Ns (midrange), avg_probes may appear similar while double hashing is 
 - single probing walks sequential memory → more cache misses when clusters grow  
 - double probing disperses probes → avoids pathological runs
 
-➡ **Probes correlate with time, but hashing overhead and cache behavior also influence results.**
+ **Probes correlate with time, but hashing overhead and cache behavior also influence results.**
 
 ---
 
@@ -69,7 +69,7 @@ In several Ns (midrange), avg_probes may appear similar while double hashing is 
 - At small N, hashing overhead dominates → double hashing slightly slower.
 - At large N, cluster avoidance dominates → double hashing faster.
 
-➡ The crossover seen around **N ≈ 2¹⁶** is exactly expected.
+ The crossover seen around **N ≈ 2¹⁶** is exactly expected.
 
 ---
 
@@ -86,7 +86,7 @@ From your runs:
 
 Double probing triggers fewer compactions because it diffuses tombstones across the table.
 
-➡ More compactions → lower avg_probes → lower elapsed time.
+ More compactions → lower avg_probes → lower elapsed time.
 
 ---
 
@@ -98,7 +98,7 @@ Throughput \(ops/ms\) mirrors elapsed time:
 - For large N: double hashing maintains higher throughput due to reduced clustering.
 - Latency per operation increases sharply for single probing as runs become longer.
 
-➡ Throughput amplifies the separation between methods at large N.
+ Throughput amplifies the separation between methods at large N.
 
 ---
 
@@ -120,7 +120,7 @@ At large N, single probing consistently shows:
 - higher eff_load_factor_pct  
 - higher avg_probes  
 
-➡ matches the runtime divergence.
+ matches the runtime divergence.
 
 ---
 
@@ -138,7 +138,7 @@ After compaction:
 - tombstones removed
 - table becomes “ideal”
 
-➡ **Histogram results confirm compaction effectiveness.**
+ **Histogram results confirm compaction effectiveness.**
 
 ---
 
@@ -170,7 +170,7 @@ After compaction:
 - Max length = 1
 
 Interpretation:
-➡ Only a few medium clusters existed; compaction completely removed them.
+ Only a few medium clusters existed; compaction completely removed them.
 
 ---
 
@@ -194,7 +194,7 @@ After:
 - All clusters reduced to length 1
 - Tombstones removed
 
-➡ Compaction fully restores the table to nearly ideal state.
+ Compaction fully restores the table to nearly ideal state.
 
 ---
 
@@ -209,7 +209,7 @@ INACTIVE runs:
 - Max run length grows from 1 → 3  
 - Because free slots merge when ACTIVE clusters shrink  
 
-➡ This is the expected structural inversion.
+ This is the expected structural inversion.
 
 ---
 
@@ -231,7 +231,7 @@ After compaction:
 - tombstones removed  
 - eff_load decreases  
 
-➡ Reduced avg_probes → reduced elapsed_ms  
+ Reduced avg_probes → reduced elapsed_ms  
 This accounts for the smoother runtime curve segments.
 
 ---
@@ -247,7 +247,7 @@ After compaction:
 - tombstones_pct ≈ 0  
 - runs max at 1  
 
-➡ Histograms perfectly support occupancy metrics.
+ Histograms perfectly support occupancy metrics.
 
 ---
 
