@@ -45,7 +45,7 @@ After compaction:
 - Distribution shifts toward short runs (mostly length 1)
 - INACTIVE space grows more contiguous (max run length increases to 3)
 
-This is normal—free slots merge as occupied slots shrink.
+This is normal free slots merge as occupied slots shrink.
 
 ---
 
