@@ -1,4 +1,3 @@
-
 # Full LRU Workload Analysis Report  
 ### Hash Tables with Open Addressing — Single vs Double Probing  
 ### Combined Sections 5.1 and 5.2 (Complete Report)
@@ -8,6 +7,10 @@
 # **5.1 Performance Analysis — Expectations vs Observations**
 
 This section evaluates timing, probe counts, and structural behavior of single (linear) probing vs. double hashing under an LRU workload using the provided trace files and harness results.
+
+## **Figure 1 — Elapsed Time vs N (Single vs Double Probing)**
+
+![Elapsed Time vs N (Single vs Double Probing)](images/d3_plotting.png)
 
 ---
 
@@ -146,6 +149,16 @@ This section uses your histogram data to relate cluster shapes to probe and timi
 
 ---
 
+## **Figure 2 — ACTIVE Runs Histogram (Before vs After Compaction)**
+
+![ACTIVE Runs Histogram (Before vs After Compaction)](images/histogram_active.png)
+
+## **Figure 3 — INACTIVE Runs Histogram (Before vs After Compaction)**
+
+![INACTIVE Runs Histogram (Before vs After Compaction)](images/histogram_inactive.png)
+
+---
+
 ## **5.2.1 Longest 1-Runs in ACTIVE+DELETED**
 
 Before compaction:
@@ -264,7 +277,7 @@ Your results — runtime, probe counts, and histograms — reveal a coherent pat
 ### **LRU Churn**
 - Creates natural tombstone buildup  
 - Stress-tests probe strategies  
-- Reward strategies that avoid clustering (double hashing)
+- Rewards strategies that avoid clustering (double hashing)
 
 ---
 
