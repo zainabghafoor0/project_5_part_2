@@ -129,13 +129,7 @@ It automates the performance experiments for all Ns across two probe strategies.
 
 ---
 
-## 🔧 Build Instructions (Linux)
-
-Make sure you have a C++17 compiler and CMake installed. On Ubuntu, for example:
-
-```bash
-sudo apt install build-essential cmake
-```
+## 🔧 Build Instructions
 
 From the **project root** (where `CMakeLists.txt` lives), run:
 
