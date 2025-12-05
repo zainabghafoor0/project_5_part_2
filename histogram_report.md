@@ -39,7 +39,7 @@ This reduces probe sequences and improves performance.
 
 ---
 
-## 4. Histogram Overlay — Before vs. After
+## 4. Histogram Overlay- Before vs. After
 After compaction:
 - Long runs shrink or disappear
 - Distribution shifts toward short runs (mostly length 1)
