@@ -33,7 +33,7 @@ This section evaluates timing, probe counts, and structural behavior of single (
 - After N ≥ 2¹⁶, double hashing becomes consistently faster.
 - At N = 2²⁰, double probing is ~25% faster.
 
-➡ Your runtime plot matches the theoretical expectation.
+➡  runtime plot matches the theoretical expectation.
 
 ---
 
@@ -80,7 +80,7 @@ Compaction:
 - reduces effective load factor  
 - resets probe chains  
 
-From your runs:
+From runs:
 - At Ns where compactions occur more frequently, single probing benefits more, because tombstones otherwise extend linear runs.
 - When compaction is infrequent, single probing slows significantly.
 
@@ -144,7 +144,7 @@ After compaction:
 
 #  Structural Analysis Using Histograms (ACTIVE + DELETED Maps)
 
-This section uses your histogram data to relate cluster shapes to probe and timing performance.
+This section uses histogram data to relate cluster shapes to probe and timing performance.
 
 ---
 
@@ -219,7 +219,7 @@ When run lengths increase:
 - avg_probes increases  
 - elapsed_ms increases  
 
-This matches your performance curve:  
+This matches performance curve:  
 single probing grows significantly slower than double hashing at high N.
 
 ---
@@ -253,7 +253,7 @@ After compaction:
 
 # Final Combined Summary
 
-Your results — runtime, probe counts, and histograms — reveal a coherent pattern:
+ results — runtime, probe counts, and histograms — reveal a coherent pattern:
 
 ### Single Probing
 - Suffers from clustering at large N  
